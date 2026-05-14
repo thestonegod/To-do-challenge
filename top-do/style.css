@@ -1,0 +1,367 @@
+/*TASK GOD  - ACTIVE STYLESHEET
+  Author: El-Shaddai 
+  Purpose: Core App Styling */
+:root {
+    --app-font: 'Inter', system-ui, sans-serif;
+    --main-page-clr: #f8fafc;
+    --sidebar-bg: #95c9eb;
+    --sidebar-text: #f8fafc;
+    --clr-surface: #ffffff;
+    --clr-accent: #3b82f6; 
+    --primary-text-clr: #0f172a;
+    --secondary-text-clr: #475569;
+    --muted-text-clr: #94a3b8;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+    --border-clr: #e2e8f0;
+    --radius-md: 12px;
+}
+
+[data-theme="dark"] {
+    --main-page-clr: #0f172a;
+    --sidebar-bg: #020617;
+    --clr-surface: #1e293b;
+    --primary-text-clr: #f1f5f9;
+    --secondary-text-clr: #cbd5e1;
+    --muted-text-clr: #64748b;
+    --border-clr: #334155;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--app-font);
+    background-color: var(--main-page-clr);
+    color: var(--primary-text-clr);
+    transition: background 0.3s ease;
+    overflow-x: hidden;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden; /* Prevents double scrollbar */
+}
+
+/* --- Sidebar & Hamburger Logic --- */
+.sidebar {
+    width: 260px;
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border-right: 1px solid var(--border-clr);
+    z-index: 100;
+}
+
+.sidebar-checkbox {
+    position: absolute;
+    opacity: 0;
+}
+
+.toggle-btn {
+    position: absolute;
+    right: -12px;
+    top: 30px;
+    background: var(--clr-accent);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    z-index: 101;
+}
+
+/* Sidebar Toggle Desktop */
+.sidebar:has(.sidebar-checkbox:checked) {
+    transform: translateX(-210px);
+}
+
+.sidebar:has(.sidebar-checkbox:checked) .arrow {
+    transform: rotate(180deg);
+}
+
+/*Main header*/
+.main-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* --- Progress Bars --- */
+#progress-section{
+    margin-bottom: 20px;
+}
+
+.mini-progress-bar-container, .progress-bar-container {
+    background: var(--border-clr);
+    height: 8px;
+    border-radius: 4px;
+    margin: 1rem 0;
+    overflow: hidden;
+}
+
+.mini-progress-bar-fill, .progress-bar-fill {
+    background: var(--clr-accent);
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+/* --- Search & Filters --- */
+.search-filter-sort {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    align-items: flex-end;
+}
+
+.search-form {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.search-form input {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-clr);
+    background: var(--clr-surface);
+    color: var(--primary-text-clr);
+}
+
+select {
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-clr);
+    background: var(--clr-surface);
+    color: var(--primary-text-clr);
+}
+
+/*renderTasks*/
+.task-header { 
+    display:flex; 
+    justify-content:space-between; 
+    padding:2rem; 
+    align-items:center; 
+}
+
+.task-priority { 
+    font-size:0.7rem; 
+    padding:2px 6px; 
+    border-radius:4px; 
+    background: var(--border-clr); 
+}
+
+.task-actions { 
+    display:flex; 
+    gap:8px; 
+    margin-top:0.5rem; 
+}
+
+.task-completed { border-left: 5px solid #22c55e; }
+.task-overdue   { border-left: 5px solid #ef4444; }
+.task-pending   { border-left: 5px solid #3b82f6; }
+
+.btn-done    { background: #22c55e; color: white; }
+.btn-undo    { background: #94a3b8; color: white; }
+.btn-edit    { background: #e2e8f0; color: #1e293b; }
+.btn-delete  { background: #fee2e2; color: #991b1b; }
+
+/* --- Main Content --- */
+.main-app-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    max-width: 100%;
+}
+
+/* --- Task Cards --- */
+.task-list {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.task-item {
+    background: var(--clr-surface);
+    border: 1px solid var(--border-clr);
+    border-radius: var(--radius-md);
+    padding: 1rem 1rem;
+    list-style: none;
+    max-width: 300px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* --- Modal (Fixed & Themed) --- */
+#task-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    place-items: center;
+    z-index: 2000;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    padding: 1rem;
+}
+
+#task-modal:not([aria-hidden="true"]) {
+    display: grid;
+}
+
+
+.form-box{
+    background: var(--clr-surface);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    width: 100%;
+    max-width: 455px;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.modal-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-form input, .modal-form textarea {
+    padding: 0.8rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-clr);
+    background: var(--main-page-clr);
+    color: var(--primary-text-clr);
+}
+
+.modal-close:hover{
+    box-shadow: var(--shadow-md);
+    background-color: orangered;
+}
+.cancel-button:hover{
+    box-shadow: var(--shadow-md);
+    background-color: orangered;
+}
+.create-button:hover{
+    box-shadow: var(--shadow-md);
+    background-color: orangered;
+}
+
+/* --- Badge Panel --- */
+#badge-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 320px;
+    height: 100vh;
+    background: var(--clr-surface);
+    box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+    transition: right 0.4s ease;
+    z-index: 1001;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+#badge-panel.is-open { right: 0; }
+
+.badge.unlocked {
+    background: #fef3c7;
+    border-color: #f59e0b;
+    color: #92400e;
+}
+
+.badge-panel header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.badge-close{
+    margin-right: -2rem; 
+    cursor: pointer;
+    
+}
+
+.badge{
+    border: 1px solid var(--border-clr);
+    border-radius: var(--radius-md);
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    background: var(--sidebar-bg);
+    color: var(--primary-text-clr);
+}
+
+/*Badge panel Dark mode */
+
+[data-theme="dark"] .badge{
+    background: var(--clr-surface);
+}
+
+[data-theme="dark"] .badge.unlocked {
+    background: #92400e;
+    color: #fef3c7;
+}
+/* --- Mobile --- */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        width: 260px;
+    }
+    
+    .sidebar:has(.sidebar-checkbox:checked) {
+        transform: translateX(0);
+    }
+
+    .toggle-btn {
+        right: -40px;
+        top: 20px;
+        width: 35px;
+        height: 35px;
+    }
+
+    .main-app-content { padding: 1rem; padding-top: 4rem; }
+}
+
+button { cursor: pointer; 
+        border: none; border-radius: 6px; padding: 0.6rem 1rem; font-weight: 500; }
+#add-task-button { background: var(--clr-accent); color: white; margin-bottom: 1rem;}
+
+/*Task cards*/
+.task-item{
+    max-width: 400px;
+
+}

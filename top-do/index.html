@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 ">
+    <title>Task God</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container" >
+
+        <!--Sidebar navigation-->
+        <aside class="sidebar">
+           <input type="checkbox" id="sidebar-toggle" class="sidebar-checkbox">
+         <label for="sidebar-toggle" class="toggle-btn">
+         <span class="arrow">></span>
+          </label>
+            <!--App identity-->
+            <header class="app-brand">
+                 
+                <h1>Task God</h1>
+
+                <section id="mini-progress-section"aria-label="Task Progress">
+
+                <header>
+                    <h2>My Progress</h2>
+                    <p>Task Progress</p>
+                </header>
+
+                <div class="mini-progress-bar-container">
+                    <div class="mini-progress-bar-fill" ></div>
+                </div>
+                <p class="progress-text" aria-live="polite">Completed: 0 | Pending: 0 | Overdue: 0 | Total: 0</p>
+            </section>
+            </header>    
+
+
+            
+            
+        </aside>
+
+
+
+        <!--Main app area-->
+        <main class="main-app-content">
+            <!--Main content header-->
+            <header class="main-header">
+
+                <!--Theme and badge controls-->
+                <section class="theme-x-badge" aria-label="Theme and Badges">
+                    <button id="theme-toggle">🔆</button>
+                    <button id="badge-button"> 🏆</button>
+                </section>
+
+                <div class="intro">
+                    <h1>Welcome to Task God</h1>
+                    <p>Your ultimate task management app</p>
+                </div>
+
+            </header>
+
+            <!--Progress section-->
+            <section id="progress-section"aria-label="Task Progress">
+
+                <header>
+                    <h2>My Progress</h2>
+                    <p>Task Progress</p>
+                </header>
+
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" ></div>
+                </div>
+                <p class="progress-text" aria-live="polite">Completed: 0 | Pending: 0 | Overdue: 0 | Total: 0</p>
+            </section>
+
+            <section class="task-workspace">
+
+                <!--Task controls-->
+
+                <div class="search-filter-sort">
+
+                    <form class="search-form" role="search">
+                        <label for="task-search">Search Tasks:</label>
+                        <input id="task-search" type="search" placeholder="Search your tasks"/>
+                    </form>
+
+                    <!---->
+                    <select class="filter-dd" aria-label="Filter tasks">
+                        <option value="all">All Tasks</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+
+                    <!---->
+                    <select class="sort-dd" aria-label="Sort tasks">
+                        <option value="created">Created</option>
+                        <option value="due">Due Date</option>
+                        <option value="priority">Priority</option>
+                        <option value="title">Title</option>
+                    </select>
+
+                </div>
+
+                <!--Task display section-->
+
+                <div class="task-board">
+
+                    <!--Add task button-->
+                    <div class="add-task-container">
+                        <button id="add-task-button" type="button">+ Add Task</button>
+                    </div> 
+
+                    <ul class="task-list">
+                        
+                    </ul>
+                    <p class="empty-state-msg" hidden>You don't have any tasks yet. Create your first task!</p>
+
+                </div>
+
+            </section>
+
+
+            <section id="task-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="task-modal-title">
+
+                <div class="form-box">
+
+                    <header class="modal-header">
+                        <h2>Create New Task</h2>
+
+                        <button class="modal-close" aria-label="Close modal">&times;</button>
+                    </header>
+
+                    <form id="task-form" class="modal-form">
+
+                        <label for="task-title">Title<span aria-hidden="true">*</span>:</label>
+                        <input type="text" id="task-title" name="task-title" required placeholder="Enter task title">
+
+                        <label for="task-desc">Description (Optional):</label>
+                        <textarea id="task-desc" name="task-desc" placeholder="What is your task about/for"></textarea>
+
+                        <label for="task-due-date"> Due date:</label>
+                        <input id="task-due-date" name="task-due-date" type="date">
+
+                        <fieldset>
+                            <legend>Priority:</legend>
+                            <label>
+                                <input type="radio" name="task-priority" value="low" checked>
+                                Low
+                            </label>
+
+                            <label>
+                                <input type="radio" name="task-priority" value="medium">
+                                Medium
+                            </label>
+
+                            <label>
+                                <input type="radio" name="task-priority" value="high">
+                                High
+                            </label>
+
+                        </fieldset>
+
+                        <footer class="modal-actions">
+
+                            <button type="button" class="cancel-button">Cancel</button>
+
+                            <button type="button" class="create-button">Create Task</button>
+
+                        </footer>
+                    </form>
+
+                </div>
+                
+            </section>
+
+            
+
+           <!-- Badge Panel (initially hidden) -->
+            <section id="badge-panel" class="badge-panel" aria-hidden="true" aria-label="Badge Panel">
+                <header>
+                    <h2>Badges</h2>
+                    <button class="badge-close" aria-label="Close badge panel">&times;</button>
+                </header>
+
+                <ul class="badge-list">
+                    <li class="badge" data-badge="task-master">
+                    <span class="badge-title">First Steps</span>
+                    <span class="badge-desc">Complete your first 2 tasks</span>
+                    </li>
+                    <li class="badge" data-badge="task-enthusiast">
+                    <span class="badge-title">Task Enthusiast</span>
+                    <span class="badge-desc">Complete 10 tasks</span>
+                    </li>
+                    <li class="badge" data-badge="productive-week">
+                    <span class="badge-title">Productive Week</span>
+                    <span class="badge-desc">Complete 20 tasks in a week</span>
+                    </li>
+                    <li class="badge" data-badge="legendary">
+                    <span class="badge-title">Legendary</span>
+                    <span class="badge-desc">Complete 50 tasks</span>
+                    </li>
+                    <li class="badge" data-badge="night-owl">
+                    <span class="badge-title">Night Owl</span>
+                    <span class="badge-desc">Complete 5 tasks after 10 PM</span>
+                    </li>
+                    <li class="badge" data-badge="early-bird">
+                    <span class="badge-title">Early Bird</span>
+                    <span class="badge-desc">Complete 5 tasks before 6 AM</span>
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>
